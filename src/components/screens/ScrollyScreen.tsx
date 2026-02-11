@@ -3,12 +3,12 @@
 import { useLocale } from "@/context/LocaleContext";
 import { useGame, type GameScreen } from "@/context/GameContext";
 import { VectorBrainDiagram } from "@/components/VectorBrainDiagram";
-import type { BrainSystem } from "@/lib/config";
+import { type BrainSystem } from "@/lib/config";
 
 const SCROLLY_SCREENS: {
   screen: GameScreen;
   next: GameScreen;
-  colorKey: keyof typeof SYSTEM_COLORS | null;
+  colorKey: BrainSystem | null;
 }[] = [
   { screen: "scrolly-1", next: "scrolly-2", colorKey: null },
   { screen: "scrolly-2", next: "scrolly-3", colorKey: "reptilian" },

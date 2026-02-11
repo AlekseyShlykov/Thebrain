@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState, useEffect } from "react";
-import type { BrainSystem } from "@/lib/config";
+import { SYSTEM_COLORS, type BrainSystem } from "@/lib/config";
 
 /** Head outline (Vector 1) – viewBox 838×943 */
 const HEAD_PATH =
@@ -57,12 +57,8 @@ const NEOCORTEX_TRANSFORM = `translate(${BRAIN_CENTER_X}, ${BRAIN_CENTER_Y}) sca
 const LIMBIC_TRANSFORM = `translate(0, ${LIMBIC_OFFSET_Y}) translate(${BRAIN_CENTER_X}, ${BRAIN_CENTER_Y}) scale(${LIMBIC_SCALE}) translate(${-LIMBIC_CENTER_X}, ${-LIMBIC_CENTER_Y})`;
 const REPTILIAN_TRANSFORM = `translate(0, ${REPTILIAN_OFFSET_Y}) translate(${BRAIN_CENTER_X}, ${BRAIN_CENTER_Y}) scale(${REPTILIAN_SCALE}) translate(${-REPTILIAN_CENTER_X}, ${-REPTILIAN_CENTER_Y})`;
 
-/** Colors from your previous picture: turquoise (back), yellow (middle), red (front). */
-const DIAGRAM_COLORS: Record<BrainSystem, string> = {
-  neocortex: "#03E7DF",   // bright turquoise
-  limbic: "#E1E438",      // bright yellow
-  reptilian: "#F71212",   // vibrant red
-};
+/** Use the shared palette from config so button dots and brain layers always match. */
+const DIAGRAM_COLORS = SYSTEM_COLORS;
 
 export interface VectorBrainDiagramProps {
   highlightedZone?: BrainSystem | null;

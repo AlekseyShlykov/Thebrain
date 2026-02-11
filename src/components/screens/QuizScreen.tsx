@@ -180,7 +180,13 @@ export default function QuizScreen() {
           <VectorBrainDiagram
             key={question.id}
             highlightedZone={diagramHighlight}
-            dominantZone={stage2 && submitted && effectiveCorrectQ1 ? effectiveCorrectQ1 : null}
+            dominantZone={
+              submitted
+                ? stage1
+                  ? effectiveCorrectMain ?? null
+                  : effectiveCorrectQ1 ?? null
+                : null
+            }
             foregroundZone={stage2 && submitted && effectiveCorrectQ2 ? effectiveCorrectQ2 : null}
             scaleReptilian={scaleReptilian}
             scaleLimbic={scaleLimbic}

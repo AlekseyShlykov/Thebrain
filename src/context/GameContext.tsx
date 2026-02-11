@@ -67,7 +67,7 @@ interface GameContextValue {
     breakdown: Record<string, { correct: number; total: number }>;
     topSystem: string;
   };
-  loadResults: () => Promise<void>;
+  loadResults: () => void;
 }
 
 const GameContext = createContext<GameContextValue | null>(null);
@@ -81,6 +81,31 @@ function getOrCreateSessionId(): string {
   const id = uuidv4();
   localStorage.setItem(SESSION_KEY, id);
   return id;
+}
+
+/** Compute results from in-memory answers (no server needed). */
+function computeResults(answers: QuizAnswer[]) {
+  const totalQuestions = answers.length;
+  const breakdown: Record<string, { correct: number; total: number }> = {
+    reptilian: { correct: 0, total: 0 },
+    limbic: { correct: 0, total: 0 },
+    neocortex: { correct: 0, total: 0 },
+  };
+
+  for (const d of answers) {
+    const key = d.q1Answer as string;
+    if (breakdown[key]) {
+      breakdown[key].total++;
+      if (d.isCorrectQ1 && d.isCorrectQ2) breakdown[key].correct++;
+    }
+  }
+
+  const totalCorrect = answers.filter((d) => d.isCorrectQ1 && d.isCorrectQ2).length;
+
+  const topSystem =
+    Object.entries(breakdown).sort((a, b) => b[1].correct - a[1].correct)[0]?.[0] ?? "neocortex";
+
+  return { totalQuestions, totalCorrect, breakdown, topSystem };
 }
 
 export function GameProvider({ children }: { children: React.ReactNode }) {
@@ -110,12 +135,6 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const sid = getOrCreateSessionId();
     setSessionId(sid);
-    // Ensure session exists server-side
-    fetch("/api/sessions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sessionId: sid }),
-    }).catch(() => {});
   }, []);
 
   const startGame = useCallback(() => {
@@ -129,19 +148,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const submitAnswer = useCallback(
     async (answer: QuizAnswer) => {
       setAnswers((prev) => [...prev, answer]);
-
-      // Persist to DB
-      try {
-        await fetch("/api/decisions", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...answer, sessionId }),
-        });
-      } catch (err) {
-        console.error("Failed to save decision:", err);
-      }
     },
-    [sessionId]
+    []
   );
 
   const nextQuestion = useCallback(() => {
@@ -161,11 +169,6 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const newId = uuidv4();
     localStorage.setItem(SESSION_KEY, newId);
     setSessionId(newId);
-    fetch("/api/sessions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sessionId: newId }),
-    }).catch(() => {});
 
     setQuestions(buildQuestionPool());
     setCurrentQuestionIndex(0);
@@ -174,15 +177,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     setScreen("landing");
   }, []);
 
-  const loadResults = useCallback(async () => {
-    try {
-      const res = await fetch(`/api/results?sessionId=${sessionId}`);
-      const data = await res.json();
-      setResults(data);
-    } catch (err) {
-      console.error("Failed to load results:", err);
-    }
-  }, [sessionId]);
+  const loadResults = useCallback(() => {
+    setResults(computeResults(answers));
+  }, [answers]);
 
   const playClick = useCallback(() => {
     if (!audio.sfxOn) return;

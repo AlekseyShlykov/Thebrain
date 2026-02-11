@@ -2,11 +2,14 @@
 
 export const SITE_TITLE = "Brain Driver";
 
+/** Base path for GitHub Pages (set via NEXT_PUBLIC_BASE_PATH env var at build time). */
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 /** Audio file paths (public URL). Replace music.mp3 with your background track. */
 export const AUDIO = {
-  music: "/audio/music.mp3",
+  music: `${BASE_PATH}/audio/music.mp3`,
   /** Click SFX (public/audio/click.mp3). */
-  click: "/audio/click.mp3",
+  click: `${BASE_PATH}/audio/click.mp3`,
 } as const;
 
 export const LINKS = {
