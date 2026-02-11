@@ -33,6 +33,8 @@ jobs:
       - name: Build static site
         env:
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          # Origin for OG/Twitter image URLs (use NEXT_PUBLIC_SITE_URL for custom domain)
+          NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
         run: npm run build
 
       - name: Add .nojekyll

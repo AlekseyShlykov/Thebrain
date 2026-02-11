@@ -18,7 +18,9 @@ const geistMono = Geist_Mono({
 /** Default metadata from English locale (app.title / app.description used for OG & Twitter). */
 const title = enStrings.app.title;
 const description = enStrings.app.description;
-const ogImagePath = "/images/og-image.png";
+/** OG/Twitter image path; must include base path when deployed to GitHub Pages (e.g. /brain-game/images/og-image.png). */
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const ogImagePath = `${basePath}/images/og-image.png`;
 const ogImageAlt = `${enStrings.app.title} — ${enStrings.app.description}`;
 
 export const metadata: Metadata = {
