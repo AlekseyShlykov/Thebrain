@@ -44,11 +44,10 @@ export const metadata: Metadata = {
     title,
     description,
     images: [ogImagePath],
-    imageAlt: ogImageAlt,
   },
   icons: {
-    // Favicon from public/favicon.png (served at /favicon.png)
-    icon: "/favicon.png",
+    // Favicon from public/favicon.png (basePath applied for GitHub Pages)
+    icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/favicon.png`,
   },
 };
 
