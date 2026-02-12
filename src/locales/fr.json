@@ -63,11 +63,11 @@
     "reptilian": "Cerveau reptilien",
     "limbic": "Système limbique",
     "neocortex": "Néocortex",
-    "topDriver": "Les actions initiées par {system} sont le mieux reconnues.",
+    "topDriver": "Vous reconnaissez le mieux les actions initiées par {system}.",
     "goDeeper": "En savoir plus",
     "tryAgain": "Réessayer",
     "shareTitle": "Mes résultats {gameName}",
-    "shareMessage": "Score : {correct}/{total} au quiz {gameName}. Meilleure reconnaissance des actions initiées par {system}.",
+    "shareMessage": "Mon score : {correct}/{total} au quiz {gameName} ! Je reconnais le mieux les actions initiées par {system}.",
     "shareOnTwitter": "Partager sur X",
     "shareOnInstagram": "Partager sur Instagram",
     "shareOnLinkedIn": "Partager sur LinkedIn",
@@ -242,9 +242,9 @@
   "situations": {
     "ctrl1": {
       "title": "Des pas la nuit",
-      "description": "On marche dans une rue déserte la nuit. Des pas rapides résonnent derrière. Le corps se tend, le cœur s'accélère. Quelques secondes plus tard, la situation est réévaluée — ce n'était qu'un passant — et la tension baisse peu à peu.",
-      "why": "Le néocortex a réévalué la situation et a apaisé la réaction limbique.",
-      "correctAnswerQ1": "neocortex",
+      "description": "On marche dans une rue déserte la nuit. Des pas rapides résonnent derrière. Le corps se tend, le cœur s'accélère, l'anxiété apparaît.",
+      "why": "Le cerveau reptilien a réagi le premier, puis le système limbique a répondu.",
+      "correctAnswerQ1": "reptilian",
       "correctAnswerQ2": "limbic"
     },
     "ctrl2": {
@@ -350,7 +350,7 @@
       "description": "Avant un examen, le pire scénario se joue dans la tête. Le corps réagit par une tension, comme à une menace réelle.",
       "why": "Le néocortex, par le scénario imaginé, a activé la réaction limbique.",
       "correctAnswerQ1": "neocortex",
-      "correctAnswerQ2": "reptilian"
+      "correctAnswerQ2": "limbic"
     },
     "ctrl17": {
       "title": "Glissade",

@@ -63,11 +63,11 @@
     "reptilian": "Reptilian Brain",
     "limbic": "Limbic System",
     "neocortex": "Neocortex",
-    "topDriver": "Actions initiated by {system} are recognized best.",
+    "topDriver": "You recognize best the actions initiated by {system}.",
     "goDeeper": "Learn More",
     "tryAgain": "Try Again",
-    "shareTitle": "My {gameName} Results",
-    "shareMessage": "Score: {correct}/{total} on the {gameName} quiz. Best at recognizing actions initiated by {system}.",
+    "shareTitle": "My Results {gameName}",
+    "shareMessage": "My score {correct}/{total} on the {gameName} quiz! I recognize best the actions initiated by {system}.",
     "shareOnTwitter": "Share on X",
     "shareOnInstagram": "Share on Instagram",
     "shareOnLinkedIn": "Share on LinkedIn",
@@ -242,9 +242,9 @@
   "situations": {
     "ctrl1": {
       "title": "Footsteps at Night",
-      "description": "Walking down an empty street at night when fast footsteps sound behind. The body tenses, the heart speeds up. A few seconds later the situation is reassessed—just a passerby—and tension gradually eases.",
-      "why": "The neocortex reassessed the situation and dampened the limbic response.",
-      "correctAnswerQ1": "neocortex",
+      "description": "Walking down an empty street at night when fast footsteps sound behind. The body tenses, the heart speeds up, anxiety appears.",
+      "why": "The reptilian brain reacted first, then the limbic system responded.",
+      "correctAnswerQ1": "reptilian",
       "correctAnswerQ2": "limbic"
     },
     "ctrl2": {
@@ -350,7 +350,7 @@
       "description": "Before an exam, the worst-case scenario plays out in the mind. The body reacts with tension, as if to a real threat.",
       "why": "The neocortex, through the imagined scenario, activated the limbic response.",
       "correctAnswerQ1": "neocortex",
-      "correctAnswerQ2": "reptilian"
+      "correctAnswerQ2": "limbic"
     },
     "ctrl17": {
       "title": "Slipping",
